@@ -39,7 +39,7 @@
 		CD7019E8283E76A3006DC3F7 = {
 			isa = PBXGroup;
 			children = (
-				CD78082B28D8602200005BF6 /* shisange */,
+				CD78082B28D8602200005BF6 /* rr */,
 				CD7019F4283E76A3006DC3F7 /* Frameworks */,
 				CD7019F3283E76A3006DC3F7 /* Products */,
 			);
@@ -62,14 +62,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CD78082B28D8602200005BF6 /* shisange */ = {
+		CD78082B28D8602200005BF6 /* rr */ = {
 			isa = PBXGroup;
 			children = (
 				EAC4AE64292552B800FA702B /* Class.h */,
 				EAC4AE65292552B800FA702B /* Class.mm */,
 				EAC4AF932929260700FA702B /* Radar.mm */,
 			);
-			path = shisange;
+			path = rr;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

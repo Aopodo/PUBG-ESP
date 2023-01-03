@@ -25,6 +25,7 @@ static 最小视图信息 POV;
 static NSString*UDID;
 
 static AVAudioSession *audioSession;
+
 @implementation RAdar : NSObject
 
 +(void)load
