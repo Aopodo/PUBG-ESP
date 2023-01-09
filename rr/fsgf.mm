@@ -1,4 +1,4 @@
-#import "Class.h"
+#import "yy.h"
 #include <string>
 #import <AVFoundation/AVFoundation.h>
 #define kuandu  [UIScreen mainScreen].bounds.size.width
@@ -18,6 +18,7 @@ static NSString*自己名字;
 static int 自己队标;
 static NSString*敌人数据;
 static NSString*物资数据;
+static NSString*未知数据;
 static float 初始当前音量;
 static float 最新音量;
 static BOOL 物资开关;
@@ -26,14 +27,14 @@ static NSString*UDID;
 
 static AVAudioSession *audioSession;
 
-@implementation RAdar : NSObject
+@implementation fsgf : NSObject
 
 +(void)load
 {
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            [[RAdar alloc] 定时器];
+            [[fsgf alloc] 定时器];
         });
         
     });
@@ -107,6 +108,8 @@ static AVAudioSession *audioSession;
         int 队友排序=1;
         NSMutableArray *敌人数组 = @[].mutableCopy;
         NSMutableArray * 物资数组= @[].mutableCopy;
+        NSMutableArray * 未知数组= @[].mutableCopy;
+        float zjx,zjy,zjz;
         for (int i = 0; i < ActorCount; i++) {
             long base = DUSWRGHGEWF<long>(ActorArray + i*8);
             int objID = DUSWRGHGEWF<int>(base + 0x18);
@@ -228,9 +231,9 @@ static AVAudioSession *audioSession;
                 float youjiaoy =  worldsgewF(右脚).Y;
                 
                 long povAddr =(playerCameraManager + 0x1120 + 0x10);
-                float zjx=DUSWRGHGEWF<float>(povAddr);
-                float zjy=DUSWRGHGEWF<float>(povAddr +4);
-                float zjz=DUSWRGHGEWF<float>(povAddr +4+4);
+                zjx=DUSWRGHGEWF<float>(povAddr);
+                zjy=DUSWRGHGEWF<float>(povAddr +4);
+                zjz=DUSWRGHGEWF<float>(povAddr +4+4);
                 
                 float distX = (drx - zjx) / 100;
                 float distY = (dry - zjy) / 100;
@@ -247,6 +250,15 @@ static AVAudioSession *audioSession;
                     //计算距离
                     auto rootComponent = DUSWRGHGEWF<long>(base + 0x258);
                     VV3 objlnfo = DUSWRGHGEWF<VV3>(rootComponent + 0x1c0);
+                    
+                    float distX = (objlnfo.X - zjx) / 100;
+                    float distY = (objlnfo.Y - zjy) / 100;
+                    float distance = (distX * distX) + (distY * distY);
+                    float distZ = (objlnfo.Z - zjz) / 100;
+                    float juli = sqrt((distZ * distZ) + distance);
+                    if (juli<5) {
+                        [未知数组 addObject:ClassName];
+                    }
                     NSString *物资名字优化=[self 物资转换:ClassName];
                     if(物资名字优化.length<2)continue;
                     NSString *wuzhidata=[NSString stringWithFormat:@"%@,%.2f,%.2f,%.2f",物资名字优化,(objlnfo.X)/100,(objlnfo.Y)/100,(objlnfo.Z)/100];
@@ -257,6 +269,7 @@ static AVAudioSession *audioSession;
         }
         物资数据=[物资数组 componentsJoinedByString:@"\n"];
         敌人数据=[敌人数组 componentsJoinedByString:@"\n"];
+        未知数据=[未知数组 componentsJoinedByString:@"\n"];
         if (!物资开关){
             物资数据=@"关闭";
         }
@@ -268,6 +281,11 @@ static AVAudioSession *audioSession;
         dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSString*物资=[NSString stringWithFormat:@".%@wz",UDID];
             [self 写数据:物资数据 file:物资];
+        });
+        //写入沙盒 用于其他功能
+        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString*物资=[NSString stringWithFormat:@".%@wz",UDID];
+            [self 写数据:未知数据 file:物资];
         });
     }
     
@@ -407,7 +425,7 @@ static AVAudioSession *audioSession;
     if ([物资 containsString:@"Mk14"]) {
         return @"Mk14";
     }
-    if ([物资 containsString:@"P90CG17"]) {
+    if ([物资 containsString:@"P90"]) {
         return @"[好东西]P90CG17";
     }
     if ([物资 containsString:@"revivalAED"]) {
