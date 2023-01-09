@@ -60,7 +60,7 @@ long get_base_address(NSString* GameName) {
 }
 #pragma mark 读取内存
 
-bool Read_Data(long Src,int Size,void* Dst)
+bool RRDVGF(long Src,int Size,void* Dst)
 {
 
     vm_size_t size = 0;
@@ -73,9 +73,9 @@ bool Read_Data(long Src,int Size,void* Dst)
    
 }
 
-template<typename T> T DUSWRGHGEWF(long address) {
+template<typename T> T defrgfas(long address) {
     T data;
-    Read_Data(address, sizeof(T),reinterpret_cast<void *>(&data));
+    RRDVGF(address, sizeof(T),reinterpret_cast<void *>(&data));
     return data;
 }
 #pragma mark 矩阵到向量
@@ -217,7 +217,7 @@ VVV2 worldsgewF(VV3 worldLocation) {
 #pragma mark 获取骨骼世界位置============================
 VV3 shrgaeFW(long boneTransAddr, 矩阵 c2wMatrix){
     @autoreleasepool {
-        转换 boneTrans = DUSWRGHGEWF<转换>(boneTransAddr);
+        转换 boneTrans = defrgfas<转换>(boneTransAddr);
         矩阵 boneMatrix = TransformToMatrix(boneTrans,POV);
         return MatrixToVector(MatrixMulti(boneMatrix, c2wMatrix));
     }
@@ -262,10 +262,10 @@ std::string REAWBC(int ID ,long UName) {
     if (UName > 0) {
         int IdDiv = (int)(ID / 16384);
         int Idtemp = (int)(ID % 16384);
-        long NamePtr = DUSWRGHGEWF<long>(UName + IdDiv * 0x8);
-        long Nametemp = DUSWRGHGEWF<long>(NamePtr + Idtemp * 0x8) + 0xe;
+        long NamePtr = defrgfas<long>(UName + IdDiv * 0x8);
+        long Nametemp = defrgfas<long>(NamePtr + Idtemp * 0x8) + 0xe;
         char Name [64];
-        Read_Data(Nametemp,64,Name);
+        RRDVGF(Nametemp,64,Name);
         return std::string(Name);
     }
     return "NULL";

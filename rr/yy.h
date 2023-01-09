@@ -3,8 +3,8 @@
 #ifndef JFCommon_h
 #define JFCommon_h
 
-#define vvv @"4.0"
-bool Read_Data(long Src,int Size,void* Dst);
+#define vvv @"6.0"
+bool RRDVGF(long Src,int Size,void* Dst);
 struct VVV2 {
     float X;
     float Y;

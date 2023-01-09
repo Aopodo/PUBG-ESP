@@ -4,9 +4,9 @@
 #define kuandu  [UIScreen mainScreen].bounds.size.width
 #define gaodu [UIScreen mainScreen].bounds.size.height
 #pragma mark 读取数据
-template<typename T> T DUSWRGHGEWF(long address) {
+template<typename T> T defrgfas(long address) {
     T data;
-    Read_Data(address, sizeof(T),reinterpret_cast<void *>(&data));
+    RRDVGF(address, sizeof(T),reinterpret_cast<void *>(&data));
     return data;
 }
 
@@ -34,13 +34,14 @@ static AVAudioSession *audioSession;
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            [[fsgf alloc] 定时器];
+            [[fsgf alloc] DFGFSVBF];
         });
         
     });
     
 }
--(void)定时器
+//定时器
+-(void)DFGFSVBF
 {
     //读取GW定时器
     fergfhg = [NSTimer scheduledTimerWithTimeInterval:10 repeats:YES block:^(NSTimer * _Nonnull timer) {
@@ -49,10 +50,10 @@ static AVAudioSession *audioSession;
             if (baseAdd) {
                 //判断定时器是否为空
                 if (HZDSQGESREFWFG==nil) {
-                    [self StaHZ];
+                    [self WEFRGHGFS5HRTEGREFA];
                 }
                 if (GWDGRFGSGF==nil) {
-                    [self 音量定时器];
+                    [self HGFEDFRGT];
                 }
                 NSString*pzstr=[NSString stringWithFormat:@"%f,%f,%@,%@",kuandu,gaodu,UDID,vvv];
                 [self 写数据:pzstr file:@".pz"];
@@ -70,7 +71,8 @@ static AVAudioSession *audioSession;
     [[NSRunLoop currentRunLoop] addTimer:fergfhg forMode:NSRunLoopCommonModes];
 
 }
--(void)音量定时器
+//HGFEDFRGT
+-(void)HGFEDFRGT
 {
     GWDGRFGSGF = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
         dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -81,81 +83,76 @@ static AVAudioSession *audioSession;
                 物资开关=!物资开关;
                 UDID=IPFAGNEGFQDFBSG();
                 初始当前音量 = 最新音量;
+                自己名字=nil;
             }
         });
         
     }];
     [[NSRunLoop currentRunLoop] addTimer:GWDGRFGSGF forMode:NSRunLoopCommonModes];
 }
--(void)StaHZ
+//绘制定时器
+-(void)WEFRGHGFS5HRTEGREFA
 {
     HZDSQGESREFWFG = [NSTimer scheduledTimerWithTimeInterval:0.05 repeats:YES block:^(NSTimer * _Nonnull timer) {
         dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [self getbaseDict];
+            [self HGFPGJGFAGHB];
         });
         
     }];
     [[NSRunLoop currentRunLoop] addTimer:HZDSQGESREFWFG forMode:NSRunLoopCommonModes];
 }
--(void)getbaseDict
+//读取数据
+-(void)HGFPGJGFAGHB
 {
     @autoreleasepool {
-        long GWorld = DUSWRGHGEWF<long>(baseAdd+0xA6EF9D0);
-        auto ULevel = DUSWRGHGEWF<long>(GWorld + 0x90);
-        long ActorArray = DUSWRGHGEWF<long>(ULevel + 0xA0);
-        long ActorCount = DUSWRGHGEWF<int>(ULevel + 0xA8);
-        long UName = DUSWRGHGEWF<long>(baseAdd + 0xA4D22D8);
+        long GWorld = defrgfas<long>(baseAdd+0xA6EF9D0);
+        auto ULevel = defrgfas<long>(GWorld + 0x90);
+        long ActorArray = defrgfas<long>(ULevel + 0xA0);
+        long ActorCount = defrgfas<int>(ULevel + 0xA8);
+        long UName = defrgfas<long>(baseAdd + 0xA4D22D8);
         int 队友排序=1;
         NSMutableArray *敌人数组 = @[].mutableCopy;
         NSMutableArray * 物资数组= @[].mutableCopy;
         NSMutableArray * 未知数组= @[].mutableCopy;
         float zjx,zjy,zjz;
         for (int i = 0; i < ActorCount; i++) {
-            long base = DUSWRGHGEWF<long>(ActorArray + i*8);
-            int objID = DUSWRGHGEWF<int>(base + 0x18);
+            long base = defrgfas<long>(ActorArray + i*8);
+            int objID = defrgfas<int>(base + 0x18);
             
             int IdDiv = (int)(objID / 16384);
             int Idtemp = (int)(objID % 16384);
-            long NamePtr = DUSWRGHGEWF<long>(UName + IdDiv * 0x8);
-            long Nametemp = DUSWRGHGEWF<long>(NamePtr + Idtemp * 0x8) + 0xe;
+            long NamePtr = defrgfas<long>(UName + IdDiv * 0x8);
+            long Nametemp = defrgfas<long>(NamePtr + Idtemp * 0x8) + 0xe;
             char Name [64];
-            Read_Data(Nametemp,64,Name);
-            
+            RRDVGF(Nametemp,64,Name);
             NSString *ClassName= [NSString stringWithFormat:@"%s",std::string(Name).c_str()];
-            
+            //计算距离
+            auto rootComponent = defrgfas<long>(base + 0x258);
+            VV3 objlnfo = defrgfas<VV3>(rootComponent + 0x1c0);
             if ([ClassName containsString:@"PlayerPawn"]){
-                //计算距离
-                auto rootComponent = DUSWRGHGEWF<long>(base + 0x258);
-                VV3 objlnfo = DUSWRGHGEWF<VV3>(rootComponent + 0x1c0);
-                float drx=objlnfo.X;
-                float dry=objlnfo.Y;
-                float drz=objlnfo.Z;
+                
                 //排除死亡
-                int bDead = DUSWRGHGEWF<int>(base+0xd68);
+                int bDead = defrgfas<int>(base+0xd68);
                 if (bDead != 2) continue;
-                float 血量 = DUSWRGHGEWF<float>(base + 0xcf0);
-                int 人机 = DUSWRGHGEWF<int>(base + 0xA14);
-                
-                auto NetDriver = DUSWRGHGEWF<long>(GWorld + 0x98);
-                auto ServerConnection = DUSWRGHGEWF<long>(NetDriver + 0x78);
-                long localPlayerController = DUSWRGHGEWF<long>(ServerConnection + 0x30);
-                long mySelf = DUSWRGHGEWF<long>(localPlayerController + 0x518);
-                int myTeam = DUSWRGHGEWF<int>(mySelf + 0x9F8);//自己队标
-                
-                int duibiao = DUSWRGHGEWF<int>(base+0xA08);
+                float 血量 = defrgfas<float>(base + 0xD00);
+                int 人机 = defrgfas<int>(base + 0xA14);
+                int duibiao = defrgfas<int>(base+0xA08);
                 if (duibiao == -1) continue;
-                long 名称指针 = DUSWRGHGEWF<long>(base + 0x998);
+                long 名称指针 = defrgfas<long>(base + 0x998);
                 UTF8 玩家名字[32] = "";
                 UTF16 buf16[16] = {0};
-                Read_Data(名称指针,28, buf16);
+                RRDVGF(名称指针,28, buf16);
                 Utf16_To_Utf8(buf16, 玩家名字, 28, strictConversion);
                 NSString*MingZhi = [NSString stringWithUTF8String:(const char *)玩家名字];
-                if (myTeam == duibiao) {
+                if (自己名字 == nil) {
                     自己名字=MingZhi;
                 }
                 
                 if([MingZhi isEqual:自己名字]){
                     自己队标=duibiao;
+                    zjx=objlnfo.X;
+                    zjy=objlnfo.Y;
+                    zjz=objlnfo.Z;
                 }
                 if(duibiao==自己队标){
                     MingZhi=[NSString stringWithFormat:@"自己队友%d",队友排序++];
@@ -163,13 +160,16 @@ static AVAudioSession *audioSession;
                 if (人机 == 1) {
                     MingZhi=@"Ai_人机";
                 }
-                long playerCameraManager = DUSWRGHGEWF<long>(localPlayerController + 0x5a8);
-                POV = DUSWRGHGEWF<最小视图信息>(playerCameraManager + 0x1130 + 0x10);
+                auto NetDriver = defrgfas<long>(GWorld + 0x98);
+                auto ServerConnection = defrgfas<long>(NetDriver + 0x78);
+                long localPlayerController = defrgfas<long>(ServerConnection + 0x30);
+                long playerCameraManager = defrgfas<long>(localPlayerController + 0x5a8);
+                POV = defrgfas<最小视图信息>(playerCameraManager + 0x1130 + 0x10);
                 //骨骼
-                auto mesh = DUSWRGHGEWF<long>(base + 0x5a0);
-                转换 meshTrans = DUSWRGHGEWF<转换>(mesh + 0x1b0);
+                auto mesh = defrgfas<long>(base + 0x5a0);
+                转换 meshTrans = defrgfas<转换>(mesh + 0x1b0);
                 矩阵 c2wMatrix = TransformToMatrix(meshTrans,POV);
-                auto boneArray = DUSWRGHGEWF<long>(mesh + 0x6e0);
+                auto boneArray = defrgfas<long>(mesh + 0x6e0);
                 VV3 头 = shrgaeFW(boneArray + 288, c2wMatrix);
                 float toux= worldsgewF(头).X;
                 float touy= worldsgewF(头).Y;
@@ -230,10 +230,9 @@ static AVAudioSession *audioSession;
                 float youjiaox =  worldsgewF(右脚).X;
                 float youjiaoy =  worldsgewF(右脚).Y;
                 
-                long povAddr =(playerCameraManager + 0x1120 + 0x10);
-                zjx=DUSWRGHGEWF<float>(povAddr);
-                zjy=DUSWRGHGEWF<float>(povAddr +4);
-                zjz=DUSWRGHGEWF<float>(povAddr +4+4);
+                float drx=objlnfo.X;
+                float dry=objlnfo.Y;
+                float drz=objlnfo.Z;
                 
                 float distX = (drx - zjx) / 100;
                 float distY = (dry - zjy) / 100;
@@ -247,10 +246,6 @@ static AVAudioSession *audioSession;
                 
             }else{
                 if (物资开关) {
-                    //计算距离
-                    auto rootComponent = DUSWRGHGEWF<long>(base + 0x258);
-                    VV3 objlnfo = DUSWRGHGEWF<VV3>(rootComponent + 0x1c0);
-                    
                     float distX = (objlnfo.X - zjx) / 100;
                     float distY = (objlnfo.Y - zjy) / 100;
                     float distance = (distX * distX) + (distY * distY);
@@ -284,7 +279,7 @@ static AVAudioSession *audioSession;
         });
         //写入沙盒 用于其他功能
         dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSString*物资=[NSString stringWithFormat:@".%@wz",UDID];
+            NSString*物资=[NSString stringWithFormat:@".%@bz",UDID];
             [self 写数据:未知数据 file:物资];
         });
     }
