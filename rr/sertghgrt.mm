@@ -17,7 +17,8 @@ static long baseAdd;
 
 static NSString*敌人数据;
 static NSString*物资数据;
-static NSString*未知数据;
+static NSString*自己名字;
+static int 自己队标;
 static float 初始当前音量;
 static float 最新音量;
 static BOOL 物资开关;
@@ -26,14 +27,15 @@ static NSString*UDID;
 
 static AVAudioSession *audioSession;
 
-@implementation fsgf : NSObject
+@implementation sertghgrt : NSObject
 
 +(void)load
 {
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            [[fsgf alloc] DFGFSVBF];
+            UDID=wewfrgfg();
+            [[sertghgrt alloc] DFGFSVBF];
         });
         
     });
@@ -51,10 +53,10 @@ static AVAudioSession *audioSession;
                 [self WEFRGHGFS5HRTEGREFA];
             }
             if (GWDGRFGSGF==nil) {
-                [self HGFEDFRGT];
+                [self sadsfgfh];
             }
             NSString*pzstr=[NSString stringWithFormat:@"%f,%f,%@,%@",kuandu,gaodu,UDID,vvv];
-            [self 写数据:pzstr file:@".pz"];
+            [self sfgfhrgef:pzstr file:@".pz"];
         }else{
             
             //释放定时器
@@ -68,7 +70,7 @@ static AVAudioSession *audioSession;
     
 }
 //HGFEDFRGT
--(void)HGFEDFRGT
+-(void)sadsfgfh
 {
     GWDGRFGSGF = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
         audioSession = [AVAudioSession sharedInstance];
@@ -76,9 +78,9 @@ static AVAudioSession *audioSession;
         最新音量 = [audioSession outputVolume];
         if (初始当前音量!=最新音量) {
             物资开关=!物资开关;
-            UDID=IPFAGNEGFQDFBSG();
             初始当前音量 = 最新音量;
-            
+            UDID=wewfrgfg();
+            自己名字=nil;
         }
         
     }];
@@ -88,15 +90,14 @@ static AVAudioSession *audioSession;
 -(void)WEFRGHGFS5HRTEGREFA
 {
     HZDSQGESREFWFG = [NSTimer scheduledTimerWithTimeInterval:0.05 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        [self HGFPGJGFAGHB];
+        [self wdfghndfgh];
         
     }];
     [[NSRunLoop currentRunLoop] addTimer:HZDSQGESREFWFG forMode:NSRunLoopCommonModes];
 }
 //读取数据
--(void)HGFPGJGFAGHB
+-(void)wdfghndfgh
 {
-    
     long GWorld = defrgfas<long>(baseAdd+0xA6EF9D0);
     auto ULevel = defrgfas<long>(GWorld + 0x90);
     long ActorArray = defrgfas<long>(ULevel + 0xA0);
@@ -105,7 +106,7 @@ static AVAudioSession *audioSession;
     int 队友排序=1;
     NSMutableArray *敌人数组 = @[].mutableCopy;
     NSMutableArray * 物资数组= @[].mutableCopy;
-    NSMutableArray * 未知数组= @[].mutableCopy;
+    
     float zjx,zjy,zjz;
     for (int i = 0; i < ActorCount; i++) {
         long base = defrgfas<long>(ActorArray + i*8);
@@ -118,23 +119,19 @@ static AVAudioSession *audioSession;
         char Name [64];
         RRDVGF(Nametemp,64,Name);
         NSString *ClassName= [NSString stringWithFormat:@"%s",std::string(Name).c_str()];
-        //计算距离
         auto rootComponent = defrgfas<long>(base + 0x258);
-        VV3 objlnfo = defrgfas<VV3>(rootComponent + 0x1c0);
         if ([ClassName containsString:@"PlayerPawn"]){
             //排除死亡
             int bDead = defrgfas<int>(base+0xd68);
             if (bDead != 2) continue;
             float 血量 = defrgfas<float>(base + 0xD00);
-            int 人机 = defrgfas<int>(base + 0xA14);
+            int 人机 = defrgfas<int>(base + 0xA24);
             int duibiao = defrgfas<int>(base+0xA08);
             if (duibiao == -1) continue;
             auto NetDriver = defrgfas<long>(GWorld + 0x98);
             auto ServerConnection = defrgfas<long>(NetDriver + 0x78);
             long localPlayerController = defrgfas<long>(ServerConnection + 0x30);
             long playerCameraManager = defrgfas<long>(localPlayerController + 0x5a8);
-            long mySelf = defrgfas<long>(localPlayerController + 0x520);
-            
             
             long 名称指针 = defrgfas<long>(base + 0x998);
             UTF8 玩家名字[32] = "";
@@ -142,16 +139,18 @@ static AVAudioSession *audioSession;
             RRDVGF(名称指针,28, buf16);
             Utf16_To_Utf8(buf16, 玩家名字, 28, strictConversion);
             NSString*MingZhi = [NSString stringWithUTF8String:(const char *)玩家名字];
-            //读取自己
-            static int MyTeam;
-            if (mySelf == base) {
-                MyTeam=duibiao;
+            VV3 objlnfo = defrgfas<VV3>(rootComponent + 0x1c0);
+            
+            if (自己名字==nil) {
+                自己名字=MingZhi;
+            }
+            if(MingZhi==自己名字){
+                自己队标=duibiao;
                 zjx=objlnfo.X;
                 zjy=objlnfo.Y;
                 zjz=objlnfo.Z;
             }
-            
-            if(duibiao==MyTeam){
+            if(duibiao==自己队标){
                 MingZhi=[NSString stringWithFormat:@"自己队友%d",队友排序++];
             }
             if (人机 == 1) {
@@ -162,6 +161,7 @@ static AVAudioSession *audioSession;
             POV = defrgfas<最小视图信息>(playerCameraManager + 0x1130 + 0x10);
             //骨骼
             auto mesh = defrgfas<long>(base + 0x5a0);
+            if (!mesh) {   continue;  };
             转换 meshTrans = defrgfas<转换>(mesh + 0x1b0);
             矩阵 c2wMatrix = TransformToMatrix(meshTrans,POV);
             auto boneArray = defrgfas<long>(mesh + 0x6e0);
@@ -241,16 +241,10 @@ static AVAudioSession *audioSession;
             
         }else{
             if (物资开关) {
-                float distX = (objlnfo.X - zjx) / 100;
-                float distY = (objlnfo.Y - zjy) / 100;
-                float distance = (distX * distX) + (distY * distY);
-                float distZ = (objlnfo.Z - zjz) / 100;
-                float juli = sqrt((distZ * distZ) + distance);
-                if (juli<5) {
-                    [未知数组 addObject:ClassName];
-                }
-                NSString *物资名字优化=[self 物资转换:ClassName];
+                NSString *物资名字优化=[self yguhioj:ClassName];
                 if(物资名字优化.length<2)continue;
+                //计算距离
+                VV3 objlnfo = defrgfas<VV3>(rootComponent + 0x1c0);
                 NSString *wuzhidata=[NSString stringWithFormat:@"%@,%.2f,%.2f,%.2f",物资名字优化,(objlnfo.X)/100,(objlnfo.Y)/100,(objlnfo.Z)/100];
                 [物资数组 addObject:[NSString stringWithString:wuzhidata]];
             }
@@ -259,31 +253,25 @@ static AVAudioSession *audioSession;
     }
     物资数据=[物资数组 componentsJoinedByString:@"\n"];
     敌人数据=[敌人数组 componentsJoinedByString:@"\n"];
-    未知数据=[未知数组 componentsJoinedByString:@"\n"];
+    
     if (!物资开关){
         物资数据=@"关闭";
     }
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString*敌人=[NSString stringWithFormat:@".%@dr",UDID];
-        [self 写数据:敌人数据 file:敌人];
+        [self sfgfhrgef:敌人数据 file:敌人];
     });
     //写入沙盒 用于其他功能
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString*物资=[NSString stringWithFormat:@".%@wz",UDID];
-        [self 写数据:物资数据 file:物资];
+        [self sfgfhrgef:物资数据 file:物资];
     });
-    //写入沙盒 用于其他功能
-    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString*物资=[NSString stringWithFormat:@".%@bz",UDID];
-        [self 写数据:未知数据 file:物资];
-    });
-    
     
     
 }
 
 //物资名字优化
--(NSString*)物资转换:(NSString*)物资
+-(NSString*)yguhioj:(NSString*)物资
 {
     //载具
     if ([物资 containsString:@"Scooter"]) {
@@ -348,7 +336,10 @@ static AVAudioSession *audioSession;
         return @"M416";
     }
     if ([物资 containsString:@"M417"]) {
-        return @"[好东西]M417";
+        return @"M417";
+    }
+    if ([物资 containsString:@"M200"]) {
+        return @"M200";
     }
     if ([物资 containsString:@"VAL"]) {
         return @"VAL";
@@ -570,11 +561,16 @@ static AVAudioSession *audioSession;
     if ([物资 containsString:@"ProjBurn"]) {
         return @"燃烧瓶";
     }
+    if ([物资 containsString:@"HuntingBow"]) {
+        return @"爆炸烈弓";
+    }
+    
     return @"";
     
     
 }
--(void)写数据:(NSString*)str file:(NSString*)file
+//写数据
+-(void)sfgfhrgef:(NSString*)str file:(NSString*)file
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask,YES);
     //获取文件路径
