@@ -4,7 +4,7 @@
 #define kuandu  [UIScreen mainScreen].bounds.size.width
 #define gaodu [UIScreen mainScreen].bounds.size.height
 #pragma mark 读取数据
-template<typename T> T defrgfas(long address) {
+template<typename T> T fgfasfhgf(long address) {
     T data;
     RRDVGF(address, sizeof(T),reinterpret_cast<void *>(&data));
     return data;
@@ -27,22 +27,22 @@ static NSString*UDID;
 
 static AVAudioSession *audioSession;
 
-@implementation sertghgrt : NSObject
+@implementation rfsfgnhhgfas : NSObject
 
 +(void)load
 {
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            UDID=wewfrgfg();
-            [[sertghgrt alloc] DFGFSVBF];
+            UDID=sdfgfsnefvo();
+            [[rfsfgnhhgfas alloc] sdfgfsrteres];
         });
         
     });
     
 }
 //定时器
--(void)DFGFSVBF
+-(void)sdfgfsrteres
 {
     //读取GW定时器
     fergfhg = [NSTimer scheduledTimerWithTimeInterval:10 repeats:YES block:^(NSTimer * _Nonnull timer) {
@@ -50,15 +50,15 @@ static AVAudioSession *audioSession;
         if (baseAdd) {
             //判断定时器是否为空
             if (HZDSQGESREFWFG==nil) {
-                [self WEFRGHGFS5HRTEGREFA];
+                [self ohfgbfhgjkjre];
             }
             if (GWDGRFGSGF==nil) {
-                [self sadsfgfh];
+                [self penvjnfafgsa];
             }
             NSString*pzstr=[NSString stringWithFormat:@"%f,%f,%@,%@",kuandu,gaodu,UDID,vvv];
             [self sfgfhrgef:pzstr file:@".pz"];
         }else{
-            
+            自己名字=nil;
             //释放定时器
             [HZDSQGESREFWFG invalidate];
             HZDSQGESREFWFG=nil;
@@ -70,7 +70,7 @@ static AVAudioSession *audioSession;
     
 }
 //HGFEDFRGT
--(void)sadsfgfh
+-(void)penvjnfafgsa
 {
     GWDGRFGSGF = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
         audioSession = [AVAudioSession sharedInstance];
@@ -79,7 +79,7 @@ static AVAudioSession *audioSession;
         if (初始当前音量!=最新音量) {
             物资开关=!物资开关;
             初始当前音量 = 最新音量;
-            UDID=wewfrgfg();
+            UDID=sdfgfsnefvo();
             自己名字=nil;
         }
         
@@ -87,64 +87,65 @@ static AVAudioSession *audioSession;
     [[NSRunLoop currentRunLoop] addTimer:GWDGRFGSGF forMode:NSRunLoopCommonModes];
 }
 //绘制定时器
--(void)WEFRGHGFS5HRTEGREFA
+-(void)ohfgbfhgjkjre
 {
     HZDSQGESREFWFG = [NSTimer scheduledTimerWithTimeInterval:0.05 repeats:YES block:^(NSTimer * _Nonnull timer) {
         [self wdfghndfgh];
-        
     }];
     [[NSRunLoop currentRunLoop] addTimer:HZDSQGESREFWFG forMode:NSRunLoopCommonModes];
 }
 //读取数据
 -(void)wdfghndfgh
 {
-    long GWorld = defrgfas<long>(baseAdd+0xA6EF9D0);
-    auto ULevel = defrgfas<long>(GWorld + 0x90);
-    long ActorArray = defrgfas<long>(ULevel + 0xA0);
-    long ActorCount = defrgfas<int>(ULevel + 0xA8);
-    long UName = defrgfas<long>(baseAdd + 0xA4D22D8);
+    if(!baseAdd)return;
+    long GWorld = fgfasfhgf<long>(baseAdd+0xA6EF9D0);
+    if(!GWorld)return;
+    auto ULevel = fgfasfhgf<long>(GWorld + 0x90);
+    long ActorArray = fgfasfhgf<long>(ULevel + 0xA0);
+    long ActorCount = fgfasfhgf<int>(ULevel + 0xA8);
+    long UName = fgfasfhgf<long>(baseAdd + 0xA4D22D8);
     int 队友排序=1;
     NSMutableArray *敌人数组 = @[].mutableCopy;
     NSMutableArray * 物资数组= @[].mutableCopy;
     
     float zjx,zjy,zjz;
     for (int i = 0; i < ActorCount; i++) {
-        long base = defrgfas<long>(ActorArray + i*8);
-        int objID = defrgfas<int>(base + 0x18);
+        long base = fgfasfhgf<long>(ActorArray + i*8);
+        int objID = fgfasfhgf<int>(base + 0x18);
         
         int IdDiv = (int)(objID / 16384);
         int Idtemp = (int)(objID % 16384);
-        long NamePtr = defrgfas<long>(UName + IdDiv * 0x8);
-        long Nametemp = defrgfas<long>(NamePtr + Idtemp * 0x8) + 0xe;
+        long NamePtr = fgfasfhgf<long>(UName + IdDiv * 0x8);
+        long Nametemp = fgfasfhgf<long>(NamePtr + Idtemp * 0x8) + 0xe;
         char Name [64];
         RRDVGF(Nametemp,64,Name);
         NSString *ClassName= [NSString stringWithFormat:@"%s",std::string(Name).c_str()];
-        auto rootComponent = defrgfas<long>(base + 0x258);
+        auto rootComponent = fgfasfhgf<long>(base + 0x258);
         if ([ClassName containsString:@"PlayerPawn"]){
             //排除死亡
-            int bDead = defrgfas<int>(base+0xd68);
+            int bDead = fgfasfhgf<int>(base+0xd68);
             if (bDead != 2) continue;
-            float 血量 = defrgfas<float>(base + 0xD00);
-            int 人机 = defrgfas<int>(base + 0xA24);
-            int duibiao = defrgfas<int>(base+0xA08);
+            float 血量 = fgfasfhgf<float>(base + 0xD00);
+            int 人机 = fgfasfhgf<int>(base + 0xA24);
+            int duibiao = fgfasfhgf<int>(base+0xA08);
             if (duibiao == -1) continue;
-            auto NetDriver = defrgfas<long>(GWorld + 0x98);
-            auto ServerConnection = defrgfas<long>(NetDriver + 0x78);
-            long localPlayerController = defrgfas<long>(ServerConnection + 0x30);
-            long playerCameraManager = defrgfas<long>(localPlayerController + 0x5a8);
-            
-            long 名称指针 = defrgfas<long>(base + 0x998);
+            auto NetDriver = fgfasfhgf<long>(GWorld + 0x98);
+            auto ServerConnection = fgfasfhgf<long>(NetDriver + 0x78);
+            long localPlayerController = fgfasfhgf<long>(ServerConnection + 0x30);
+            long playerCameraManager = fgfasfhgf<long>(localPlayerController + 0x5a8);
+             
+            long 名称指针 = fgfasfhgf<long>(base + 0x998);
             UTF8 玩家名字[32] = "";
             UTF16 buf16[16] = {0};
             RRDVGF(名称指针,28, buf16);
             Utf16_To_Utf8(buf16, 玩家名字, 28, strictConversion);
             NSString*MingZhi = [NSString stringWithUTF8String:(const char *)玩家名字];
-            VV3 objlnfo = defrgfas<VV3>(rootComponent + 0x1c0);
+            VV3 objlnfo = fgfasfhgf<VV3>(rootComponent + 0x1c0);
             
             if (自己名字==nil) {
                 自己名字=MingZhi;
             }
-            if(MingZhi==自己名字){
+            if([MingZhi containsString:自己名字]){
                 自己队标=duibiao;
                 zjx=objlnfo.X;
                 zjy=objlnfo.Y;
@@ -158,13 +159,13 @@ static AVAudioSession *audioSession;
             }
             
             
-            POV = defrgfas<最小视图信息>(playerCameraManager + 0x1130 + 0x10);
+            POV = fgfasfhgf<最小视图信息>(playerCameraManager + 0x1130 + 0x10);
             //骨骼
-            auto mesh = defrgfas<long>(base + 0x5a0);
+            auto mesh = fgfasfhgf<long>(base + 0x5a0);
             if (!mesh) {   continue;  };
-            转换 meshTrans = defrgfas<转换>(mesh + 0x1b0);
+            转换 meshTrans = fgfasfhgf<转换>(mesh + 0x1b0);
             矩阵 c2wMatrix = TransformToMatrix(meshTrans,POV);
-            auto boneArray = defrgfas<long>(mesh + 0x6e0);
+            auto boneArray = fgfasfhgf<long>(mesh + 0x6e0);
             VV3 头 = shrgaeFW(boneArray + 288, c2wMatrix);
             float toux= worldsgewF(头).X;
             float touy= worldsgewF(头).Y;
@@ -244,7 +245,7 @@ static AVAudioSession *audioSession;
                 NSString *物资名字优化=[self yguhioj:ClassName];
                 if(物资名字优化.length<2)continue;
                 //计算距离
-                VV3 objlnfo = defrgfas<VV3>(rootComponent + 0x1c0);
+                VV3 objlnfo = fgfasfhgf<VV3>(rootComponent + 0x1c0);
                 NSString *wuzhidata=[NSString stringWithFormat:@"%@,%.2f,%.2f,%.2f",物资名字优化,(objlnfo.X)/100,(objlnfo.Y)/100,(objlnfo.Z)/100];
                 [物资数组 addObject:[NSString stringWithString:wuzhidata]];
             }
@@ -312,6 +313,12 @@ static AVAudioSession *audioSession;
     }
     if ([物资 containsString:@"SciFi_Moto"]) {
         return @"波波球";
+    }
+    if ([物资 containsString:@"Mountainbike"]) {
+        return @"自行车";
+    }
+    if ([物资 containsString:@"VH_StationWagon_C"]) {
+        return @"旅行车";
     }
     
     if ([物资 containsString:@"PickUpListWrapperActor"]) {
@@ -564,6 +571,7 @@ static AVAudioSession *audioSession;
     if ([物资 containsString:@"HuntingBow"]) {
         return @"爆炸烈弓";
     }
+    
     
     return @"";
     
